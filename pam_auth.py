@@ -17,11 +17,7 @@ def login(request, response):
     d = json.loads(msg)
     log.debug("Json-unpacked:\n{0}".format(d))
 
-    d["login"] = str(d["login"])
-    d["password"] = str(d["password"])
-
-    log.debug("utf-8 decoded:\n{0}".format(d))
-
+    # auth = pam.authenticate(d["login"], d["password"])
     auth = yield pam.authenticate(d["login"], d["password"])
     log.debug("Authenticated: {0}".format(auth))
     log.debug("Writing response...")
